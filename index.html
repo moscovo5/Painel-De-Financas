@@ -1,365 +1,1607 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Recursos Humanos || PG</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!--******Link Css********-->
-   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap');
+    <title>PG || Painel Financeiro</title>
+    <link rel="stylesheet" href="public/Fontes/fontawesome-free-7.2.0-web/fontawesome-free-7.2.0-web/css/all.min.css">
+    <!-- -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <style>
+        :root {
+            --bg1: #f6f5f6;
+            --rgba: rgba(255, 255, 255, .5);
+            --bg2: #f90;
+            --fontP: "poppins";
+            --fontM: "montserrat";
+            --fontR: "roboto";
+        }
 
-:root {
-    --bg1: #f6f5f6;
-    --bg2: #f90;
-}
-html{
-    scroll-behavior: smooth;
-}
-::-webkit-scrollbar{
-    width: 1px;
-    height: 1px;
-    background: transparent;
-}
-body {
-    background: var(--bg1);
-}
+        html {
+            scroll-behavior: smooth;
+        }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    outline: none;
-    font-style: normal;
-    text-decoration: none;
-}
+        ::-webkit-scrollbar {
+            width: 1px;
+            height: 1px;
+            background: transparent;
+        }
 
-.header {
-    background: var(--bg2);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    gap: 15px;
-    justify-content: space-between;
-    width: 100vw;
+        body {
+            background: var(--bg1);
+            visibility: hidden;
+            cursor: none;
+            pointer-events: none;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
 
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            outline: none;
+            font-style: normal;
+            text-decoration: none;
+        }
 
-.conjunto-header .logo {
-    color: #fff;
-    font-weight: bolder;
-    font-size: 26px;
-    letter-spacing: 2px;
-    font-family: "montserrat";
-    pointer-events: none;
-}
+        .header {
+            z-index: 300;
+            top: 0;
+            position: sticky;
+            transition: .3s ease;
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            gap: 15px;
+            justify-content: space-between;
+            width: 100vw;
+        }
 
-.conjunto-header .menu i {
-    color: #fff;cursor: pointer;
-    font-size: 1.6em;
-    padding: 5px 10px;border-radius: 3px;
-}.conjunto-header .menu i:hover{
-    border: 2px solid #fff;
+        .header.baixou-h {
+            background: var(--bg2);
+        }
 
-}.conjunto-header .menu i:active{
-    background: #fff;
-    color: var(--bg2);
-}
-.relogio{
-height: 30px;
-width: 100px;
-border-radius: 3px;
-font-family: "poppins";
-letter-spacing: 2px;
-pointer-events: none; 
-background: var(--bg2);
-color: #fff;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-.header .conjunto-header {
-    display: flex;
-    width: 300px;
-    width: 100%;
-    padding: 0 10px;
-    justify-content: space-between;
-}
+        .conjunto-header .logo {
+            color: #fff;
+            font-weight: bolder;
+            font-size: 26px;
+            letter-spacing: 2px;
+            font-family: var(--fontM);
+            pointer-events: none;
+        }
 
-.conjud-header {
-    display: flex;
-    align-items: center;
-    border-radius: 10px;
-    justify-content: space-between;
-    width: 98vw;
-    background: var(--bg1);
-    justify-content: space-between;
-    display: flex;
-    padding: 10px;
-}
+        .conjunto-header .menu i {
+            color: #fff;
+            cursor: pointer;
+            font-size: 1.6em;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
 
-.search {
-    display: flex;
-    position: relative;
-    height: 45px;
-    width: 350px;
-    border-radius: 10px;
-    overflow: hidden;
-    align-items: center;
-    background-color: rgba(77, 74, 74, 0.897);
-    justify-content: center;
-}
+        .conjunto-header .menu i:hover {
+            border: 2px solid #fff;
+        }
 
-.search input {
-    width: calc(100% - 60px);
-    position: absolute;
-    border: none;
-    left: 0;
-    padding: 0 20px;
-    height: 100%;
-    background: transparent;
-}
+        .conjunto-header .menu i:active {
+            background: #fff;
+            color: var(--bg2);
+        }
 
-.search input::-webkit-input-placeholder {
-    color: #bbb;
-}
+        .conjunto-relogio {
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 3px;
+            pointer-events: none;
+            align-items: center;
+            color: var(--bg2);
+        }
 
-.search i {
-    position: absolute;
-    right: 0px;
-    background: #000;
-    height: 100%;
-    color: #fff;
-    width: 50px;
-    cursor: pointer;
-    display: flex;
-    border-radius: 10px;
-    align-items: center;
-    justify-content: center;
-}
+        .conjunto-relogio i {
+            position: absolute;
+            opacity: 1;
+        }
 
-.search i.close {
-    opacity: 0;
+        .conjunto-relogio .relogio {
+            transform: scale(0);
+        }
 
-}
+        .relogio {
+            height: 30px;
+            width: 100px;
+            border-radius: 3px;
+            font-family: var(--fontP);
+            letter-spacing: 2px;
+            pointer-events: none;
+            background: var(--bg2);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-.links-nav,
-.icons-header {
-    padding: 0 10px;
-    display: flex;
-    gap: 25px;
+        .header .conjunto-header {
+            display: flex;
+            width: 300px;
+            width: 100%;
+            padding: 0 10px;
+            justify-content: space-between;
+        }
 
-}
+        .conjud-header {
+            display: flex;
+            position: relative;
+            align-items: center;
+            border-radius: 10px;
+            justify-content: space-between;
+            width: 98vw;
+            background: var(--bg1);
+            display: flex;
+            padding: 10px;
+        }
 
-.links-nav a {
-    color: #000;
-    text-transform: capitalize;
-    font-family: poppins;
-       flex: 0 0 auto;
-    padding: 10px 20px;
-    background: #eee;
-    border-radius: 6px;
-    font-weight: 550;
-    cursor: pointer;
-    position: relative;
-    z-index: 1;
-    left: 0;
-}
+        .search.active .input {
+            display: block;
+        }
 
-.links-nav a:hover {
-    color: #fff;
-}
+        .search.active .close {
+            opacity: 1;
+        }
 
-.links-nav a::before {
-    position: absolute;
-    border-radius: 10px;
-    top: 0;
-    z-index: -1;
-    content: "";
-    right: 0;
-    transition: .2s;
-    width: 0%;
-    height: 100%;
-    background: var(--bg2);
-}
+        .search {
+            display: flex;
+            position: relative;
+            height: 35px;
+            width: 350px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid var(--rgba);
+            align-items: center;
+            background-color: rgba(255, 255, 255, .5);
+            justify-content: center;
+        }
 
-.links-nav a:hover::before {
-    width: 100%;
-    left: 0;
-}
-.links-nav a{
-    display: block;
-    transform: translateX(100px);
-    opacity: 0;
-    animation: slideRight 0.6s ease forwards;
-}
+        .search.active {
+            width: 350px;
+        }
 
-.links-nav a:nth-child(1){animation-delay: 0.1s;}
-.links-nav a:nth-child(2){animation-delay: 0.2s;}
-.links-nav a:nth-child(3){animation-delay: 0.3s;}
-.links-nav a:nth-child(4){animation-delay: 0.4s;}
-.links-nav a:nth-child(5){animation-delay: 0.5s;}
+        .search input {
+            width: calc(100% - 60px);
+            position: absolute;
+            border: none;
+            left: 0;
+            color: #fff;
+            font-family: var(--fontP);
+            padding: 0 20px;
+            z-index: 1;
+            height: 100%;
+            background: transparent;
+        }
 
-@keyframes slideRight{
-    from{
-        transform: translateX(100px);
-        opacity: 0;
-    }
+        .search input::-webkit-input-placeholder {
+            color: #777;
+        }
 
-    to{
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
+        .search i {
+            position: absolute;
+            right: 0px;
+            padding: 0 10px;
+            background: var(--rgba);
+            height: 100%;
+            color: var(--bg2);
+            width: 50px;
+            cursor: pointer;
+            display: flex;
+            border-radius: 10px;
+            align-items: center;
+            justify-content: center;
+        }
 
-.links-nav{
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    white-space: nowrap;
-    scroll-behavior: smooth;
-}
+        .search i.close {
+            opacity: 0;
+        }
 
-.links-nav a{
+        .links-nav,
+        .icons-header {
+            padding: 0 10px;
+            display: flex;
+            gap: 25px;
+        }
 
-    text-decoration: none;
-}
+        .links-nav a,
+        .link-nav a {
+            color: #000;
+            text-transform: capitalize;
+            font-family: var(--fontP);
+            flex: 0 0 auto;
+            padding: 10px 20px;
+            background: #eee;
+            border-radius: 6px;
+            overflow: hidden;
+            font-weight: 550;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            left: 0;
+        }
 
+        .links-nav a:hover,
+        .link-nav a:hover {
+            color: #fff;
+        }
 
+        .links-nav a i,
+        .link-nav a i {
+            display: none;
+        }
 
-.icons-header i:hover {
-    color: var(--bg2);
-    cursor: pointer;
-}
-.main-abjunt{
-    height: 100vh;
-}
+        .links-nav a::before,
+        .link-nav a::before {
+            position: absolute;
+            top: 0;
+            z-index: -1;
+            content: "";
+            right: 0;
+            transition: .2s;
+            width: 0%;
+            height: 100%;
+            background: var(--bg2);
+        }
 
-footer{
-    background: var(--bg2);
-    text-align: center;
-    color: #fff;padding: 20px 0;
-    font-family: "roboto";
-    text-decoration: none;
-    letter-spacing: 2px;
-    font-weight: 550;
-    pointer-events: none;
-}
-   </style>
+        .links-nav a:hover::before,
+        .link-nav a:hover::before {
+            width: 100%;
+            left: 0;
+        }
 
+        .links-nav a,
+        .link-nav a {
+            display: block;
+            transform: translateX(100px);
+            opacity: 0;
+            animation: slideRight 0.6s ease forwards;
+        }
+
+        .links-nav a:nth-child(1),
+        .link-nav a:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .links-nav a:nth-child(2),
+        .link-nav a:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .links-nav a:nth-child(3),
+        .link-nav a:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .links-nav a:nth-child(4),
+        .link-nav a:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .links-nav a:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes slideRight {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .links-nav {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            white-space: nowrap;
+            scroll-behavior: smooth;
+        }
+
+        .link-nav.nav-activo {
+            right: 0;
+        }
+
+        .links-nav a {
+            text-decoration: none;
+        }
+
+        .icons-header i:hover {
+            color: var(--bg2);
+            cursor: pointer;
+        }
+
+        /* ===== ÁREA PRINCIPAL ===== */
+        .main-abjunt {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            padding: 40px 20px;
+        }
+
+        .link-nav {
+            position: absolute;
+            top: 120%;
+            display: grid;
+            background: var(--bg2);
+            max-height: 70vh;
+            padding: 10px;
+            right: -100%;
+            overflow: hidden;
+            gap: 15px;
+        }
+
+        .link-nav a {
+            height: 50px;
+            background: linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, .5));
+        }
+
+        .link-nav a::before {
+            background: #fff;
+        }
+
+        .link-nav a:hover {
+            color: var(--bg2);
+        }
+
+        /*container-conteudo_Principal*/
+        .container-conteudo_Principal {
+            padding: 20px 40px;
+        }
+
+        /* ===== SECÇÃO DAS TABELAS ===== */
+        .secao-tabelas {
+            padding: 40px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            width: 100%;
+        }
+
+        .tabela-titulo {
+            font-family: var(--fontM);
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #fff;
+            background: var(--bg2);
+            padding: 10px 20px;
+            border-radius: 8px 8px 0 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .tabela-subtitulo {
+            font-family: var(--fontR);
+            font-size: 0.85em;
+            font-weight: 600;
+            color: var(--bg2);
+            background: #fff3d6;
+            padding: 6px 16px;
+            border-left: 4px solid var(--bg2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tabela-wrapper {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            overflow-x: auto;
+        }
+
+        table.fin-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--fontP), sans-serif;
+            font-size: 0.88em;
+        }
+
+        table.fin-table th {
+            background: var(--bg2);
+            color: #fff;
+            padding: 10px 14px;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        table.fin-table th.left {
+            text-align: left;
+        }
+
+        table.fin-table td {
+            padding: 9px 14px;
+            border-bottom: 1px solid #f0ede8;
+            color: #333;
+        }
+
+        table.fin-table td.num {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        table.fin-table td.center {
+            text-align: center;
+        }
+
+        table.fin-table tr:nth-child(even) {
+            background: #fafaf8;
+        }
+
+        table.fin-table tr:hover {
+            background: #fff6e0;
+            transition: background 0.15s;
+        }
+
+        tr.subtitulo-row td {
+            background: #fff3d6;
+            color: var(--bg2);
+            font-weight: 700;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 7px 14px;
+            border-bottom: none;
+        }
+
+        tr.total-row td {
+            background: #fff;
+            font-weight: 700;
+            color: #222;
+            border-top: 2px solid var(--bg2);
+            border-bottom: 2px solid var(--bg2);
+        }
+
+        tr.total-geral-row td {
+            background: var(--bg2);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1em;
+        }
+
+        /* TABELA FIFO — colunas agrupadas */
+        table.fifo-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--fontP), sans-serif;
+            font-size: 0.82em;
+        }
+
+        table.fifo-table th {
+            background: var(--bg2);
+            color: #fff;
+            padding: 8px 10px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        table.fifo-table th.grupo {
+            background: #e68a00;
+            font-size: 0.95em;
+            letter-spacing: 1px;
+        }
+
+        table.fifo-table td {
+            padding: 7px 10px;
+            border-bottom: 1px solid #f0ede8;
+            border-right: 1px solid #f0ede8;
+            text-align: center;
+            color: #333;
+        }
+
+        table.fifo-table td.left {
+            text-align: left;
+        }
+
+        table.fifo-table tr:nth-child(even) {
+            background: #fafaf8;
+        }
+
+        table.fifo-table tr:hover {
+            background: #fff6e0;
+        }
+
+        table.fifo-table td.sep {
+            border-right: 2px solid var(--bg2);
+        }
+
+        table.fifo-table th.sep {
+            border-right: 2px solid #fff;
+        }
+
+        .menu-lateral {
+            position: absolute;
+            top: -120%;
+            opacity: 0;
+            pointer-events: none;
+            background: var(--bg2);
+            width: 100vw;
+            padding: 20px 25px;
+            padding-bottom: 20px;
+            left: -1%;
+            display: flex;
+            align-items: center;
+            transition: .3s ease-in;
+            z-index: 100;
+        }
+
+        .menu-lateral.lateralMenu {
+            opacity: 1;
+            pointer-events: initial;
+            top: 110%;
+        }
+
+        .icons-heard-fa {
+            display: grid;
+            gap: 10px;
+            height: 100%;
+            overflow-y: auto;
+            border-left: 2px solid var(--rgba);
+            border-right: 2px solid var(--rgba);
+            border-bottom: 2px solid var(--rgba);
+            width: 100%;
+        }
+
+        .icons-heard-fa span {
+            color: #eee;
+            font-family: var(--fontP);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            cursor: pointer;
+            padding: 10px;
+            border-top: 2px solid var(--rgba);
+            transition: .3s ease;
+        }
+
+        .icons-heard-fa span:hover {
+            background: #000;
+            color: var(--bg2);
+        }
+
+        .bolinhas {
+            position: absolute;
+            right: 10%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 5px 6px;
+            border-radius: 50px;
+            background: #333;
+        }
+
+        .blinhas {
+            border-radius: 50%;
+            height: 15px;
+            position: none;
+            transition: .3s;
+            width: 15px;
+            position: relative;
+            animation: scalas 4s infinite linear;
+        }
+
+        @keyframes scalas {
+
+            0%,
+            50% {
+                transform: scale(.9);
+            }
+
+            51%,
+            80% {
+                transform: scale(1);
+            }
+
+            81%,
+            100% {
+                transform: scale(1.1);
+            }
+        }
+
+        .b1 {
+            background: #f09;
+            animation-delay: .2s;
+        }
+
+        .b2 {
+            animation-delay: .4s;
+            background: #f98d00;
+        }
+
+        .b3 {
+            animation-delay: .6s;
+            background: #ff0;
+        }
+
+        #cursor,
+        #cur {
+            opacity: 1;
+            mix-blend-mode: difference;
+            z-index: 9999;
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        #cur {
+            width: 25px;
+            height: 25px;
+            border: 2px dashed var(--bg2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #cursor {
+            width: 10px;
+            height: 10px;
+            background: var(--bg2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #cursor {
+            width: 10px;
+            height: 10px;
+            background: var(--bg2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #particles {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background: linear-gradient(135deg, #0f172a, #0b1220);
+        }
+
+        footer {
+            background: var(--bg2);
+            text-align: center;
+            color: #fff;
+            padding: 20px 0;
+            font-family: var(--fontR);
+            text-decoration: none;
+            letter-spacing: 2px;
+            font-weight: 550;
+            pointer-events: none;
+        }
+
+        @media(max-width:884px) {
+            .links-nav {
+                display: none;
+            }
+        }
+
+        @media(max-width:800px) {
+            .relogio {
+                display: flex;
+            }
+
+            .links-nav a {
+                align-items: center;
+                display: flex;
+                gap: 10px;
+                font-size: 1em;
+            }
+
+            .links-nav a i {
+                display: block;
+            }
+
+            .links-nav a::before {
+                border-radius: 0;
+                background: #000;
+            }
+
+            .links-nav a:hover {
+                color: var(--bg2);
+            }
+        }
+
+        @media(max-width:430px) {
+            .relogio {
+                display: none;
+            }
+
+            .sub {
+                margin: auto auto;
+                left: 15px;
+                border-radius: 10px;
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .search {
+                display: none;
+            }
+        }
+
+        @media(max-width:360px) {
+            html {
+                font-size: 50%;
+            }
+
+            .header {
+                gap: 10px;
+                padding: 5px;
+            }
+
+            .conjunto-header a.logo {
+                font-size: 20px;
+            }
+
+            .conjunto-header .menu i {
+                color: #fff;
+                font-size: 20px;
+            }
+
+            .icons-header i {
+                font-size: 16px;
+            }
+
+            .search i {
+                height: 30px;
+                color: #fff;
+                background: #000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+            }
+
+            .search {
+                width: 250px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                display: none;
+                justify-content: center;
+            }
+        }
+
+        @media(max-width:280px) {
+            .header {
+                padding: 4px;
+            }
+
+            .header a.logo {
+                color: #f00;
+            }
+        }
+
+        @media(min-width:102px) {
+            body {
+                visibility: visible;
+                pointer-events: initial;
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <canvas id="particles"></canvas>
+    <div id="cursor"></div>
+    <div id="cur"></div>
     <div class="header">
         <div class="conjunto-header">
-            <a href="#" class="logo">Gestão Financceira</a>
+            <a href="#" class="logo">Finanças</a>
+
+            <div class="search searchable" id="searchCampo">
+                <i class="iconSearch fa-solid fa-magnifying-glass"></i>
+                <i class="close fa-solid fa-xmark"></i>
+                <input type="text" placeholder="Busca..." class="input" id="searchInput">
+            </div>
             <div class="menu"><i>☰</i></div>
+            <div class="bolinhas cores">
+                <div class="blinhas b1"></div>
+                <div class="blinhas b2"></div>
+                <div class="blinhas b3"></div>
+            </div>
         </div>
         <div class="conjud-header">
-            <div class="icons-header">
-                <div class="search" id="searchCampo"><i class="iconSearch fa-solid fa-magnifying-glass"></i>
-                    <i class="close fa-solid fa-xmark"></i>
-                    <input type="text" placeholder="Busca..." class="input">
+
+            <div class="icons-header sub">
+                <i class="fa-solid fa-user-lock"></i>
+                <i class="fa-solid fa-user" style="color:#1E90FF;"></i>
+                <i class="fa-solid fa-user-cog" style="color:#FFA500;"></i>
+                <i class="fa-solid fa-user-lock" style="color:#DC143C;"></i>
+                <i class="fa-solid fa-phone" style="color:#1E90FF;"></i>
+                <i class="fas fa-lock" style="color:#888;"></i>
+                <i class="fas fa-exclamation-triangle" style="color:#FF4500;"></i>
+            </div>
+
+            <div class="conjunto-relogio">
+                <div class="relogio">00:00:00</div>
+                <i class="fa-solid fa-clock"></i>
+            </div>
+
+            <div class="menu-lateral">
+                <div class="icons-heard-fa">
+                    <span><i class="fa-solid fa-house"></i><label for="#">Home</label></span>
+                    <span><i class="fas fa-exclamation-triangle"></i><label for="#">Alertas</label></span>
+                    <span><i class="fas fa-chart-line"></i><label for="#">Perdas</label></span>
+                    <span><i class="fas fa-tasks"></i><label for="#">Planejamento</label></span>
+                    <span><i class="fas fa-bullseye"></i><label for="#">Metas</label></span>
+                    <span><i class="fa-solid fa-circle-info"></i><label for="#">Informações</label> </span>
+                    <span><i class="fa-brands fa-cash-app"></i></span>
+                    <span><i class="fa-solid fa-cart-shopping"></i><label for="#">Lucros</label></span>
+                    <span><i class="fa-solid fa-calendar"></i><label for="#">Calendario</label></span>
+                    <span><i class="fa-solid fa-briefcase"></i><label for="#">Agenda</label></span>
+
                 </div>
             </div>
-            <div class="links-nav">
-                <a href="#">Inicio</a>
-                <a href="#">Inicio</a>
-                <a href="#">Inicio</a>
-                <a href="#">Inicio</a>
-                <a href="#">Inicio</a>
-            </div>
-            <div class="icons-header">
-                <i class="fa-solid fa-phone"></i>
-                <i class="fa-solid fa-user"></i>
-                <i class="fa-solid fa-user-cog"></i>
-                <i class="fa-solid fa-user-lock"></i>
-            </div>
-            <div class="relogio">00:00:00</div>
         </div>
     </div>
+    <div class="container-conteudo_Principal">
+        <div style="border: 1px solid var(--rgba);padding: 5px 10px; border-radius: 10px;" class="grafico">
+            <canvas id="myChart" height="120"></canvas>
+        </div>
+        <!-- ============================================================ -->
+        <!-- SECÇÃO DE TABELAS FINANCEIRAS                                 -->
+        <!-- ============================================================ -->
+        <section class="secao-tabelas">
 
-    <main class="main-abjunt">
+            <!-- ====== TABELA 1 — BALANÇO DA EMPRESA (ACTIVO) ====== -->
+            <div>
+                <div class="tabela-titulo">Balanço da Empresa — Activo</div>
+                <div class="tabela-wrapper">
+                    <table class="fin-table">
+                        <thead>
+                            <tr>
+                                <th class="left" style="width:45%">Descrição</th>
+                                <th style="width:8%">Nota</th>
+                                <th colspan="2">Valores em Kwanza — Exercícios</th>
+                            </tr>
+                            <tr>
+                                <th class="left"></th>
+                                <th></th>
+                                <th>2025</th>
+                                <th>2026</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Activo Não Corrente -->
+                            <tr class="subtitulo-row">
+                                <td colspan="4">Activo Não Corrente</td>
+                            </tr>
+                            <tr>
+                                <td>Imobilizações Corpóreas</td>
+                                <td class="center">4</td>
+                                <td class="num">10.300.000,00</td>
+                                <td class="num">9.600.000,00</td>
+                            </tr>
+                            <tr>
+                                <td>Imobilizações Incorpóreas</td>
+                                <td class="center">5</td>
+                                <td class="num">2.000.000,00</td>
+                                <td class="num">2.000.000,00</td>
+                            </tr>
+                            <tr>
+                                <td>Investimentos em Subsidiários e Associados</td>
+                                <td class="center">6</td>
+                                <td class="num">3.000.000,00</td>
+                                <td class="num">3.000.000,00</td>
+                            </tr>
+                            <tr>
+                                <td>Outros Artigos Financeiros</td>
+                                <td class="center">7</td>
+                                <td class="num">100.000,00</td>
+                                <td class="num">90.000,00</td>
+                            </tr>
+                            <tr>
+                                <td>Outros Activos não Correntes</td>
+                                <td class="center">9</td>
+                                <td class="num">230.000,00</td>
+                                <td class="num">210.000,00</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td><strong>Total do Activo Não Corrente</strong></td>
+                                <td></td>
+                                <td class="num"><strong>15.630.000,00</strong></td>
+                                <td class="num"><strong>14.900.000,00</strong></td>
+                            </tr>
 
-    </main>
+                            <!-- Activo Corrente -->
+                            <tr class="subtitulo-row">
+                                <td colspan="4">Activo Corrente</td>
+                            </tr>
+                            <tr>
+                                <td>Existências</td>
+                                <td class="center">8</td>
+                                <td class="num">6.600.000,00</td>
+                                <td class="num">5.900.000,00</td>
+                            </tr>
+                            <tr>
+                                <td>Contas a Receber</td>
+                                <td class="center">9</td>
+                                <td class="num">4.900.000,00</td>
+                                <td class="num">4.700.000,00</td>
+                            </tr>
+                            <tr>
+                                <td>Disponibilidade</td>
+                                <td class="center">10</td>
+                                <td class="num">1.200.000,00</td>
+                                <td class="num">1.300.000,00</td>
+                            </tr>
+                            <tr>
+                                <td>Outros Activos Correntes</td>
+                                <td class="center">11</td>
+                                <td class="num">200.000,00</td>
+                                <td class="num">190.000,00</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td><strong>Total do Activo Corrente</strong></td>
+                                <td></td>
+                                <td class="num"><strong>12.900.000,00</strong></td>
+                                <td class="num"><strong>12.090.000,00</strong></td>
+                            </tr>
+
+                            <!-- Total Geral -->
+                            <tr class="total-geral-row">
+                                <td><strong>Total do Activo</strong></td>
+                                <td></td>
+                                <td class="num"><strong>28.530.000,00</strong></td>
+                                <td class="num"><strong>26.990.000,00</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ====== TABELA 2 — BALANÇO DA EMPRESA (CAPITAL PRÓPRIO / PASSIVO) ====== -->
+            <div>
+
+                <div class="tabela-titulo">Balanço da Empresa — Capital Próprio / Passivo</div>
+                <div class="tabela-wrapper">
+                    <table class="fin-table">
+                        <thead>
+                            <tr>
+                                <th class="left" style="width:45%">Descrição</th>
+                                <th style="width:8%">Nota</th>
+                                <th colspan="2">Valores em Kwanza — Exercícios</th>
+                            </tr>
+                            <tr>
+                                <th class="left"></th>
+                                <th></th>
+                                <th>2025</th>
+                                <th>2026</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Capital Próprio -->
+                            <tr class="subtitulo-row">
+                                <td colspan="4">Capital Próprio</td>
+                            </tr>
+                            <tr>
+                                <td>CP / Resultado Líquido</td>
+                                <td class="center">12</td>
+                                <td class="num">43.141.707,00</td>
+                                <td class="num">43.141.707,00</td>
+                            </tr>
+                            <tr>
+                                <td>Reserva</td>
+                                <td class="center">13</td>
+                                <td class="num">520.910,00</td>
+                                <td class="num">520.910,00</td>
+                            </tr>
+                            <tr>
+                                <td>Resultado Transitado</td>
+                                <td class="center">14</td>
+                                <td class="num">11.091.998,00</td>
+                                <td class="num">10.832.930,00</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td><strong>Total do Capital Próprio</strong></td>
+                                <td></td>
+                                <td class="num"><strong>58.219.870,00</strong></td>
+                                <td class="num"><strong>58.219.870,00</strong></td>
+                            </tr>
+
+                            <!-- Passivo Não Corrente -->
+                            <tr class="subtitulo-row">
+                                <td colspan="4">Passivo Não Corrente</td>
+                            </tr>
+                            <tr>
+                                <td>Empréstimo de Médio e Longo Prazo</td>
+                                <td class="center">15</td>
+                                <td class="num">19.506.482,00</td>
+                                <td class="num">1.130.508,00</td>
+                            </tr>
+                            <tr>
+                                <td>Outros Passivos não Correntes</td>
+                                <td class="center">19</td>
+                                <td class="num">52.299.443,00</td>
+                                <td class="num">52.299.443,00</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td><strong>Total do Passivo Não Corrente</strong></td>
+                                <td></td>
+                                <td class="num"><strong>71.805.925,00</strong></td>
+                                <td class="num"><strong>53.429.951,00</strong></td>
+                            </tr>
+
+                            <!-- Passivo Corrente -->
+                            <tr class="subtitulo-row">
+                                <td colspan="4">Passivo Corrente</td>
+                            </tr>
+                            <tr>
+                                <td>Contas a Pagar</td>
+                                <td class="center">19</td>
+                                <td class="num">38.670.440,00</td>
+                                <td class="num">85.466.626,00</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td><strong>Total do Passivo Corrente</strong></td>
+                                <td></td>
+                                <td class="num"><strong>38.670.440,00</strong></td>
+                                <td class="num"><strong>85.466.626,00</strong></td>
+                            </tr>
+
+                            <!-- Total Geral -->
+                            <tr class="total-geral-row">
+                                <td><strong>Total do BP / Passivo</strong></td>
+                                <td></td>
+                                <td class="num"><strong>168.696.235,00</strong></td>
+                                <td class="num"><strong>147.116.447,00</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ====== TABELA 3 — MAPA DE CUSTEIO FIFO ====== -->
+            <div>
+                <div class="tabela-titulo">Mapa de Custeio — First In, First Out (FIFO)</div>
+                <div class="tabela-wrapper">
+                    <table class="fifo-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2" style="width:7%">Dia</th>
+                                <th rowspan="2" class="left sep" style="width:10%">Designação</th>
+                                <th colspan="3" class="grupo sep">Entradas (Compras)</th>
+                                <th colspan="3" class="grupo sep">Saídas (Vendas)</th>
+                                <th colspan="3" class="grupo">Existências</th>
+                            </tr>
+                            <tr>
+                                <th>Qt</th>
+                                <th>PU</th>
+                                <th class="sep">Valor</th>
+                                <th>Qt</th>
+                                <th>PU</th>
+                                <th class="sep">Valor</th>
+                                <th>Qt</th>
+                                <th>PU</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Mês 01 — Existência inicial -->
+                            <tr class="subtitulo-row">
+                                <td>Mês 01</td>
+                                <td class="left" colspan="9">Existência Inicial</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="left">—</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td class="sep">—</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td class="sep">—</td>
+                                <td>9.000</td>
+                                <td>500,00</td>
+                                <td>4.500.000</td>
+                            </tr>
+
+                            <!-- 01/05 Venda -->
+                            <tr>
+                                <td>01/05</td>
+                                <td class="left">Venda</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td class="sep">—</td>
+                                <td>4.000</td>
+                                <td>500,00 / 400,00</td>
+                                <td class="sep">1.600.000</td>
+                                <td>5.000</td>
+                                <td>500,00</td>
+                                <td>2.500.000</td>
+                            </tr>
+
+                            <!-- 01/07 Compra -->
+                            <tr>
+                                <td>01/07</td>
+                                <td class="left">Compra</td>
+                                <td>7.000</td>
+                                <td>862,86</td>
+                                <td class="sep">6.040.020</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td class="sep">—</td>
+                                <td>5.000</td>
+                                <td>500,00</td>
+                                <td>2.500.000</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="left"></td>
+                                <td></td>
+                                <td></td>
+                                <td class="sep"></td>
+                                <td></td>
+                                <td></td>
+                                <td class="sep"></td>
+                                <td>7.000</td>
+                                <td>862,86</td>
+                                <td>6.040.020</td>
+                            </tr>
+
+                            <!-- 01/12 Venda -->
+                            <tr>
+                                <td>01/12</td>
+                                <td class="left">Venda</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td class="sep">—</td>
+                                <td>2.500</td>
+                                <td>350,00</td>
+                                <td class="sep">1.345.000</td>
+                                <td>2.500</td>
+                                <td>500,00</td>
+                                <td>1.250.000</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="left"></td>
+                                <td></td>
+                                <td></td>
+                                <td class="sep"></td>
+                                <td></td>
+                                <td></td>
+                                <td class="sep"></td>
+                                <td>7.000</td>
+                                <td>862,86</td>
+                                <td>6.040.020</td>
+                            </tr>
+
+                            <!-- 01/19 Venda -->
+                            <tr>
+                                <td>01/19</td>
+                                <td class="left">Venda</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td class="sep">—</td>
+                                <td>500</td>
+                                <td>500,00</td>
+                                <td class="sep">2.300.000</td>
+                                <td>2.000</td>
+                                <td>500,00</td>
+                                <td>1.000.000</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="left"></td>
+                                <td></td>
+                                <td></td>
+                                <td class="sep"></td>
+                                <td></td>
+                                <td></td>
+                                <td class="sep"></td>
+                                <td>7.000</td>
+                                <td>862,86</td>
+                                <td>6.040.020</td>
+                            </tr>
+
+                            <!-- 01/25 Compra -->
+                            <tr>
+                                <td>01/25</td>
+                                <td class="left">Compra</td>
+                                <td>10.000</td>
+                                <td>404,00</td>
+                                <td class="sep">4.040.000</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td class="sep">—</td>
+                                <td>2.000</td>
+                                <td>500,00</td>
+                                <td>1.000.000</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="left"></td>
+                                <td></td>
+                                <td></td>
+                                <td class="sep"></td>
+                                <td></td>
+                                <td></td>
+                                <td class="sep"></td>
+                                <td>7.000</td>
+                                <td>862,86</td>
+                                <td>6.040.020</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="left"></td>
+                                <td></td>
+                                <td></td>
+                                <td class="sep"></td>
+                                <td></td>
+                                <td></td>
+                                <td class="sep"></td>
+                                <td>10.000</td>
+                                <td>404,00</td>
+                                <td>4.040.000</td>
+                            </tr>
+
+                            <!-- 01/28 Venda -->
+                            <tr>
+                                <td>01/28</td>
+                                <td class="left">Venda</td>
+                                <td>—</td>
+                                <td>—</td>
+                                <td class="sep">—</td>
+                                <td>2.000</td>
+                                <td>460,00</td>
+                                <td class="sep">920.000</td>
+                                <td>7.000</td>
+                                <td>862,86</td>
+                                <td>6.040.020</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="left"></td>
+                                <td></td>
+                                <td></td>
+                                <td class="sep"></td>
+                                <td></td>
+                                <td></td>
+                                <td class="sep"></td>
+                                <td>10.000</td>
+                                <td>404,00</td>
+                                <td>4.040.000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    </div>
+
+    </section>
+    <!-- ============================================================ -->
 
     <footer>&copy; Luanda aos <span id="ano"></span></footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        
-const search = document.getElementById("sh");
-const btnsearch = document.getElementById("btn-search");
-const inputseach = document.querySelector(".inputSeach");
+        (
+            function () {
+                document.addEventListener("DOMContentLoaded", () => {
 
-document.addEventListener("DOMContentLoaded", () => {
-    if (btnsearch) {
-        btnsearch.addEventListener("click", () => {
-            search.classList.toggle("barra-Pesquisa");
-            inputseach.classList.toggle("input-pesquisa");
-        });
+                    /*====================== Header Scroller =================================*/
+                    const header = document.querySelector(".header");
 
-        search.addEventListener("click", (e) => {
-            e.stopPropagation();
-        });
+                    document.addEventListener("scroll", function () {
 
+                        if (!header) return;
 
+                        if (window.scrollY > 50) {
+                            header.classList.add("baixou-h");
+                        } else {
+                            header.classList.remove("baixou-h");
+                        }
 
+                    });
 
-        document.addEventListener("click", () => {
-            inputseach.classList.toggle("input-pesquisa");
-            search.classList.remove("barra-Pesquisa")
-
-        })
-    }
-
-
-
-
-    /* ---------------- ANO AUTOMÁTICO ---------------- */
-    const anoEl = document.getElementById("ano");
-    if (anoEl) {
-        anoEl.textContent = new Date().getFullYear();
-    }
-    function r() {
-        let relogio = document.querySelector(".relogio");
-        let a = new Date();
-
-        if (relogio) {
-            let h = a.getHours().toString().padStart(2, "0");
-            let m = a.getMinutes().toString().padStart(2, "0");
-            let s = a.getSeconds().toString().padStart(2, "0");
-            relogio.textContent = `${h}:${m}:${s}`
-        }
-
-    }
-    setInterval(r, 1000)
-    r()
+                    /*============= Menu ======================*/
+                    const menu=document.querySelector(".menu-lateral")
+                    const menuBnt=document.querySelector(".menu");
+menuBnt.addEventListener("click",function(e){
+    e.stopPropagation();
+    menu.classList.toggle("lateralMenu");
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-
-    const menuActivo = document.querySelector(".menu")
-    const navBar = document.querySelector(".nav-bar");
-
-    if (menuActivo) {
-        menuActivo.addEventListener("click", () => {
-            navBar.classList.add("nav-activo");
-        });
-
-        navBar.addEventListener("click", (e) => {
-            e.stopPropagation();
-        });
-
-        document.addEventListener("click", () => {
-            navBar.classList.remove("nav-activo");
-
-        });
-
-    }
-
+document.addEventListener("click",function(e){
+const foraMenu=menu.contains(e.target)||menuBnt.contains(e.target);
+if(!foraMenu){
+    menu.classList.remove("lateralMenu");
+}
 })
+
+                    /* =========================
+                       🔎 SEARCH NA TABELA COM HIGHLIGHT
+                    ========================= */
+                    const input = document.getElementById("searchInput");
+
+                    if (input) {
+                        const rows = document.querySelectorAll(".fin-table tbody tr");
+
+                        input.addEventListener("input", function () {
+                            const query = this.value.toLowerCase().trim();
+
+                            rows.forEach(row => {
+
+                                // ignora linhas especiais
+                                if (
+                                    row.classList.contains("subtitulo-row") ||
+                                    row.classList.contains("total-row") ||
+                                    row.classList.contains("total-geral-row")
+                                ) {
+                                    row.style.background = "";
+                                    row.style.color = "";
+                                    return;
+                                }
+
+                                const text = row.textContent.toLowerCase();
+
+                                if (query === "") {
+                                    row.style.display = "";
+                                    row.style.background = "";
+                                    row.style.color = "";
+                                }
+                                else if (text.includes(query)) {
+                                    row.style.display = "";
+                                    row.style.background = "orange";
+                                    row.style.color = "#fff";
+                                }
+                                else {
+                                    row.style.display = "none";
+                                    row.style.background = "";
+                                    row.style.color = "";
+                                }
+                            });
+                        });
+                    }
+
+
+                    /* =========================
+                       🖱️ CURSOR PERSONALIZADO
+                    ========================= */
+                    const cursor = document.getElementById('cursor');
+                    const trail = document.getElementById('cur');
+
+                    let mx = 0, my = 0, tx = 0, ty = 0;
+
+                    if (cursor && trail) {
+
+                        document.addEventListener('mousemove', e => {
+                            mx = e.clientX;
+                            my = e.clientY;
+
+                            cursor.style.left = (mx - 6) + 'px';
+                            cursor.style.top = (my - 6) + 'px';
+                        });
+
+                        function animateTrail() {
+                            tx += (mx - tx - 8) * 0.12;
+                            ty += (my - ty - 5) * 0.12;
+
+                            trail.style.left = tx + 'px';
+                            trail.style.top = ty + 'px';
+
+                            requestAnimationFrame(animateTrail);
+                        }
+
+                        animateTrail();
+                    }
+
+
+                    /* =========================
+                       ⏰ RELÓGIO DINÂMICO
+                    ========================= */
+                    const timeEl = document.querySelector(".relogio");
+
+                    if (timeEl) {
+                        function updateClock() {
+                            const now = new Date();
+
+                            const h = String(now.getHours()).padStart(2, '0');
+                            const m = String(now.getMinutes()).padStart(2, '0');
+                            const s = String(now.getSeconds()).padStart(2, '0');
+
+                            timeEl.textContent = `${h}:${m}:${s}`;
+                        }
+
+                        setInterval(updateClock, 1000);
+                        updateClock();
+                    }
+                    (
+                        function () {
+                            const conjunto_relogio = document.querySelector(".conjunto_relogio").style.border = "2px solid #0ff"
+                        }
+                    )
+
+                    /* =========================
+                       📊 GRÁFICO (Chart.js)
+                    ========================= */
+                    const ct = document.getElementById('myChart');
+
+                    if (ct && typeof Chart !== "undefined") {
+
+                        new Chart(ct, {
+                            type: 'bar',
+                            data: {
+                                labels: ['Activo Não Corrente', 'Activo Corrente', 'Total'],
+                                datasets: [
+                                    {
+                                        label: '2025',
+                                        data: [15630000, 12900000, 28530000],
+                                        backgroundColor: '#1E90FF'
+                                    },
+                                    {
+                                        label: '2026',
+                                        data: [14900000, 12090000, 26990000],
+                                        backgroundColor: '#FF8C00'
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                plugins: {
+                                    legend: {
+                                        labels: {
+                                            color: "#fff"
+                                        }
+                                    }
+                                },
+                                scales: {
+                                    x: {
+                                        ticks: { color: "#fff" }
+                                    },
+                                    y: {
+                                        ticks: { color: "#fff" }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    /*=============== Particulas =============================*/
+
+
+                    const canvas = document.getElementById("particles");
+                    const ctx = canvas.getContext("2d");
+
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+
+                    window.addEventListener("resize", () => {
+                        canvas.width = window.innerWidth;
+                        canvas.height = window.innerHeight;
+                    });
+
+                    const colors = [
+                        "#00bcd4",
+                        "#3f51b5",
+                        "#4caf50",
+                        "#9c27b0",
+                        "#2196f3",
+                        "#607d8b"
+                    ];
+
+                    let mouse = { x: null, y: null };
+
+                    window.addEventListener("mousemove", (e) => {
+                        mouse.x = e.x;
+                        mouse.y = e.y;
+                    });
+
+                    class Particle {
+                        constructor() {
+                            this.x = Math.random() * canvas.width;
+                            this.y = Math.random() * canvas.height;
+                            this.size = Math.random() * 2 + 0.8;
+                            this.speedX = (Math.random() - 0.5) * 0.5;
+                            this.speedY = (Math.random() - 0.5) * 0.5;
+                            this.color = colors[Math.floor(Math.random() * colors.length)];
+                        }
+
+                        update() {
+                            this.x += this.speedX;
+                            this.y += this.speedY;
+
+                            // bounce
+                            if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                            if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+
+                            // interação leve com mouse
+                            if (mouse.x && mouse.y) {
+                                let dx = this.x - mouse.x;
+                                let dy = this.y - mouse.y;
+                                let dist = Math.sqrt(dx * dx + dy * dy);
+
+                                if (dist < 120) {
+                                    this.x += dx * 0.01;
+                                    this.y += dy * 0.01;
+                                }
+                            }
+                        }
+
+                        draw() {
+                            ctx.fillStyle = this.color;
+                            ctx.globalAlpha = 0.8;
+                            ctx.beginPath();
+                            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    }
+
+                    let particles = [];
+
+                    function init() {
+                        particles = [];
+                        for (let i = 0; i < 90; i++) {
+                            particles.push(new Particle());
+                        }
+                    }
+
+                    function connect() {
+                        for (let a = 0; a < particles.length; a++) {
+                            for (let b = a; b < particles.length; b++) {
+
+                                let dx = particles[a].x - particles[b].x;
+                                let dy = particles[a].y - particles[b].y;
+                                let distance = Math.sqrt(dx * dx + dy * dy);
+
+                                if (distance < 120) {
+                                    ctx.strokeStyle = "rgba(100, 200, 255, 0.15)";
+                                    ctx.lineWidth = 1;
+                                    ctx.beginPath();
+                                    ctx.moveTo(particles[a].x, particles[a].y);
+                                    ctx.lineTo(particles[b].x, particles[b].y);
+                                    ctx.stroke();
+                                }
+                            }
+                        }
+                    }
+
+                    function animate() {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                        connect();
+
+                        particles.forEach(p => {
+                            p.update();
+                            p.draw();
+                        });
+
+                        requestAnimationFrame(animate);
+                    }
+
+                    init();
+                    animate();
+
+                    /*============= Ano Automatico ==================*/
+                    const ano = document.querySelector("#ano").innerHTML = new Date().getFullYear()
+
+                });
+            }
+        )()
+
+
+
     </script>
 </body>
 
