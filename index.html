@@ -41,6 +41,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            cursor: none;
             outline: none;
             font-style: normal;
             text-decoration: none;
@@ -322,40 +323,48 @@
             cursor: pointer;
         }
 
-        /* ===== ÁREA PRINCIPAL ===== */
-        .main-abjunt {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
-            justify-content: center;
-            min-height: 60vh;
-            padding: 40px 20px;
+        .anuncio-grafico {
+            display: none;
         }
 
-        .link-nav {
-            position: absolute;
-            top: 120%;
-            display: grid;
+        .anuncio-grafico p {
+            color: #fff;
+            font-family: var(--fontP);
+            text-align: justify;
+            line-height: 1.3;
+            font-weight: 550;
+            margin-bottom: 10px;
+        }
+
+        .anuncio-grafico button {
             background: var(--bg2);
-            max-height: 70vh;
-            padding: 10px;
-            right: -100%;
-            overflow: hidden;
-            gap: 15px;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            width: 130px;
+            height: 30px;
+            transition: .3s;
+
         }
 
-        .link-nav a {
-            height: 50px;
-            background: linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, .5));
+        .anuncio-grafico button:hover {
+            transform: scale(.9);
         }
 
-        .link-nav a::before {
-            background: #fff;
+        .downloads-p {
+            background: linear-gradient(135deg, #f00, transparent 5%, #ff2272, #00f);
+            padding-inline: 3px;
+            background-position: center;
+            background-clip: text;
+            background-size: 300%;
+            -webkit-text-fill-color: transparent;
+            animation: 8s infinite alternate cor;
         }
 
-        .link-nav a:hover {
-            color: var(--bg2);
+        @keyframes cor {
+            to {
+                background-position: 300%;
+            }
         }
 
         /*container-conteudo_Principal*/
@@ -665,6 +674,22 @@
             transform: translate(-50%, -50%);
         }
 
+        .grafico {
+            border: 1px solid var(--rgba);
+            padding: 5px 10px;
+            background: var(--bg2);
+            z-index: 1;
+            border-radius: 10px;
+            height: 100vh;
+            display: inline;
+        }
+
+        .grafico canvas {
+            z-index: 1;
+            border-radius: 10px;
+            border: 1px solid var(--rgba)
+        }
+
         #particles {
             position: fixed;
             inset: 0;
@@ -687,13 +712,32 @@
             pointer-events: none;
         }
 
+        @media(max-width:554px) {
+            .grafico {
+                display: none;
+            }
+
+            .anuncio-grafico {
+                display: flex;
+            }
+
+        }
+
         @media(max-width:884px) {
             .links-nav {
                 display: none;
             }
+
+            .bolinhas {
+                border: 2px solid #f00;
+            }
         }
 
-        @media(max-width:800px) {
+        @media(max-width:809px) {
+            .grafico canva {
+                border: 2px solid #f00;
+            }
+
             .relogio {
                 display: flex;
             }
@@ -716,6 +760,10 @@
 
             .links-nav a:hover {
                 color: var(--bg2);
+            }
+
+            .bolinhas {
+                display: none;
             }
         }
 
@@ -856,8 +904,20 @@
         </div>
     </div>
     <div class="container-conteudo_Principal">
-        <div style="border: 1px solid var(--rgba);padding: 5px 10px; border-radius: 10px;" class="grafico">
+        <div class="grafico">
             <canvas id="myChart" height="120"></canvas>
+        </div>
+        <div class="anuncio-grafico" style="flex-direction: column;align-items: baseline;background: linear-gradient(135deg,#00f,#0ff); padding: 30px 30px;
+        box-shadow: 0 0 30px #00f;border-radius: 10px;
+
+        ">
+            <h2 style="font-family: var(--fontR);color: #fff;font-size: 36px;font-style: italic;
+            font-weight: 550;
+            margin-bottom: .5em;
+            ">Faca o <span class="downloads-p">Download</span> do grafico</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, iure id. Eum culpa suscipit porro! Eos
+                dignissimos libero qui eius.</p>
+            <button class="Baixar_file" >Baixar</button>
         </div>
         <!-- ============================================================ -->
         <!-- SECÇÃO DE TABELAS FINANCEIRAS                                 -->
@@ -1317,19 +1377,32 @@
                     });
 
                     /*============= Menu ======================*/
-                    const menu=document.querySelector(".menu-lateral")
-                    const menuBnt=document.querySelector(".menu");
-menuBnt.addEventListener("click",function(e){
-    e.stopPropagation();
-    menu.classList.toggle("lateralMenu");
-});
+                    const menu = document.querySelector(".menu-lateral")
+                    const menuBnt = document.querySelector(".menu");
+                    menuBnt.addEventListener("click", function (e) {
+                        e.stopPropagation();
+                        menu.classList.toggle("lateralMenu");
+                    });
 
-document.addEventListener("click",function(e){
-const foraMenu=menu.contains(e.target)||menuBnt.contains(e.target);
-if(!foraMenu){
-    menu.classList.remove("lateralMenu");
-}
-})
+                    document.addEventListener("click", function (e) {
+                        const foraMenu = menu.contains(e.target) || menuBnt.contains(e.target);
+                        if (!foraMenu) {
+                            menu.classList.remove("lateralMenu");
+                        }
+                    })
+
+                    /* =========================
+                       🔎 Download
+                    ========================= */
+
+                    function BaixarFile() {
+                        const link = document.createElement("a");
+
+                        link.href = "Grafico Financeiro.PNG";
+                        link.download = "Grafico Financeiro.PNG"; 
+                        link.click();
+                    }
+                    document.querySelector(".Baixar_file").addEventListener("click",BaixarFile);
 
                     /* =========================
                        🔎 SEARCH NA TABELA COM HIGHLIGHT
