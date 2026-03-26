@@ -7,6 +7,13 @@
     <title>PG || Painel Financeiro</title>
     <link rel="stylesheet" href="public/Fontes/fontawesome-free-7.2.0-web/fontawesome-free-7.2.0-web/css/all.min.css">
     <!-- -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+        
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <style>
         :root {
@@ -31,7 +38,7 @@
         body {
             background: var(--bg1);
             visibility: hidden;
-            cursor: none;
+            cursor: initial;
             pointer-events: none;
             overflow-y: scroll;
             overflow-x: hidden;
@@ -93,24 +100,39 @@
         }
 
         .conjunto-relogio {
-            display: flex;
-            flex-direction: row-reverse;
-            gap: 3px;
-            pointer-events: none;
-            align-items: center;
-            color: var(--bg2);
+            display: grid;
+            place-items: center;
+            width: 100px;
+            position: relative;
+            height: 30px;
+            margin-inline-end: 10px;
         }
 
-        .conjunto-relogio i {
-            position: absolute;
+        .conjunto-relogio.relogio-Activo i {
+            opacity: 0;
+        }
+
+        .conjunto-relogio.relogio-Activo .relogio {
             opacity: 1;
         }
 
-        .conjunto-relogio .relogio {
-            transform: scale(0);
+        .conjunto-relogio i {
+            opacity: 1;
+            display: grid;
+            place-items: center;
+            color: var(--bg2);
+            height: 100%;
+            width: 100%;
+            border: 2px solid #f98d00;
+            border-radius: 10px;
+            position: absolute;
+            margin: auto auto;
         }
 
+        .conjunto-relogio .relogio {}
+
         .relogio {
+            opacity: 0;
             height: 30px;
             width: 100px;
             border-radius: 3px;
@@ -222,7 +244,7 @@
             background: #eee;
             border-radius: 6px;
             overflow: hidden;
-            font-weight: 550;
+            font-weight: 400;
             cursor: pointer;
             position: relative;
             z-index: 1;
@@ -398,7 +420,7 @@
         .tabela-subtitulo {
             font-family: var(--fontR);
             font-size: 0.85em;
-            font-weight: 600;
+            font-weight: 300;
             color: var(--bg2);
             background: #fff3d6;
             padding: 6px 16px;
@@ -427,7 +449,7 @@
             color: #fff;
             padding: 10px 14px;
             text-align: center;
-            font-weight: 600;
+            font-weight: 350;
             letter-spacing: 0.5px;
         }
 
@@ -883,7 +905,7 @@
 
             <div class="conjunto-relogio">
                 <div class="relogio">00:00:00</div>
-                <i class="fa-solid fa-clock"></i>
+                <i class="fa-solid fa-clock relogio-btn"></i>
             </div>
 
             <div class="menu-lateral">
@@ -917,7 +939,7 @@
             ">Faca o <span class="downloads-p">Download</span> do grafico</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, iure id. Eum culpa suscipit porro! Eos
                 dignissimos libero qui eius.</p>
-            <button class="Baixar_file" >Baixar</button>
+            <button class="Baixar_file">Baixar</button>
         </div>
         <!-- ============================================================ -->
         <!-- SECÇÃO DE TABELAS FINANCEIRAS                                 -->
@@ -1399,10 +1421,10 @@
                         const link = document.createElement("a");
 
                         link.href = "Grafico Financeiro.PNG";
-                        link.download = "Grafico Financeiro.PNG"; 
+                        link.download = "Grafico Financeiro.PNG";
                         link.click();
                     }
-                    document.querySelector(".Baixar_file").addEventListener("click",BaixarFile);
+                    document.querySelector(".Baixar_file").addEventListener("click", BaixarFile);
 
                     /* =========================
                        🔎 SEARCH NA TABELA COM HIGHLIGHT
@@ -1503,9 +1525,14 @@
                     }
                     (
                         function () {
-                            const conjunto_relogio = document.querySelector(".conjunto_relogio").style.border = "2px solid #0ff"
+                            const conjunto_relogio = document.querySelector(".conjunto-relogio").style.border = "2px solid #f00";
+                            const btn_Relogio = document.querySelector(".relogio-btn");
+                            btn_Relogio.onclick = function () {
+                                conjunto_relogio.classList.add("relogio-Activo")
+                            }
+
                         }
-                    )
+                    )()
 
                     /* =========================
                        📊 GRÁFICO (Chart.js)
@@ -1571,7 +1598,8 @@
                         "#4caf50",
                         "#9c27b0",
                         "#2196f3",
-                        "#607d8b"
+                        "#607d8b",
+                        "#F98D00"
                     ];
 
                     let mouse = { x: null, y: null };
